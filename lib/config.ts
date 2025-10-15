@@ -1,56 +1,51 @@
-// lib/config.ts 
-// Nettoyé : aucun marqueur de diff, aucun « @@ … »
-// Types en import "type" pour éviter tout import runtime inutile
+// lib/config.ts
 import type { ColorScheme, StartScreenPrompt, ThemeOption } from "@openai/chatkit";
 
-// Titre de l’app (affiché dans l’UI)
-export const appTitle = "Tonton Jeff × AMZ SC";
+/** ID du workflow ChatKit (public côté client) */
+export const WORKFLOW_ID =
+  process.env.NEXT_PUBLIC_CHATKIT_WORKFLOW_ID?.trim() ?? "";
 
-// Thème (on reste large avec Partial pour éviter les erreurs de typage strict)
-export const colorScheme: ColorScheme = "dark";
-export const theme: Partial<ThemeOption> = {
-  colorScheme,
+/** Endpoint Next.js pour créer une session ChatKit côté serveur */
+export const CREATE_SESSION_ENDPOINT = "/api/create-session";
+
+/** Laisse un tableau (même vide) pour éviter les erreurs .map() */
+export const STARTER_PROMPTS: StartScreenPrompt[] = [
+  {
+    title: "Débloquer une marque",
+    prompt:
+      "Guide-moi étape par étape pour débloquer une marque sur Amazon avec une facture conforme.",
+  },
+  {
+    title: "Sourcing 500–3000 €",
+    prompt:
+      "Propose une stratégie de sourcing sécurisée (factures compatibles Amazon, retours maîtrisés).",
+  },
+  {
+    title: "Refus Amazon",
+    prompt:
+      "Diagnostique un refus de déblocage et liste les actions correctives rapides.",
+  },
+];
+
+export const PLACEHOLDER_INPUT = "Décris ton cas (ASIN, contexte, objectif)…";
+
+export const GREETING =
+  "Espace Membres — Tonton JEF, votre expert en arbitrage Amazon.";
+
+/** Thème : fourni en fonction du mode (light/dark) demandé par ChatKit */
+export const getThemeConfig = (theme: ColorScheme): ThemeOption => ({
+  colorScheme: theme, // "light" | "dark"
   color: {
+    grayscale: {
+      hue: 220,
+      tint: 6,
+      shade: theme === "dark" ? -1 : 4,
+    },
     accent: {
-      // Ton orange brand
       primary: "#FF7D07",
       level: 2,
     },
   },
   radius: "round",
   density: "comfortable",
-};
-
-// Messages d’accueil et placeholder
-export const greetingText =
-  "Bienvenue ! Session Q&R — pose ta question, on attaque direct.";
-export const placeholderText = "Écris ta question ici…";
-
-// Prompts de démarrage (Start Screen)
-export const startScreenPrompts: StartScreenPrompt[] = [
-  {
-    title: "Débloquer une marque",
-    prompt:
-      "Guide-moi étape par étape pour débloquer une marque sur Amazon via facture valide.",
-  },
-  {
-    title: "Sourcing 500–3000 €",
-    prompt:
-      "Propose une stratégie de sourcing sécurisée (factures compatibles Amazon, retours faciles).",
-  },
-  {
-    title: "Diagnostiquer un refus Amazon",
-    prompt:
-      "J’ai un refus de déblocage marque. Liste les causes probables et les actions correctives.",
-  },
-];
-
-// (optionnel) Base API si tu proxifies ChatKit
-export const chatkitApiBase =
-  process.env.NEXT_PUBLIC_CHATKIT_API_BASE || undefined;
-
-// Workflow (Agent Builder) – requis côté starter
-export const workflowId = process.env.NEXT_PUBLIC_CHATKIT_WORKFLOW_ID || "";
-
-// (optionnel) modèle si tu le forces via env
-export const defaultModel = process.env.NEXT_PUBLIC_MODEL || undefined;
+});
