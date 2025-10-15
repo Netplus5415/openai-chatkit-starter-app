@@ -8,7 +8,7 @@ export const WORKFLOW_ID =
 /** Endpoint Next.js (côté serveur) qui crée la session ChatKit */
 export const CREATE_SESSION_ENDPOINT = "/api/create-session";
 
-/** Prompts d'écran d'accueil (pas de `title` dans ce type) */
+/** Prompts d'écran d'accueil (type sans `title` dans ta version) */
 export const STARTER_PROMPTS: StartScreenPrompt[] = [
   {
     prompt:
@@ -33,10 +33,10 @@ export const GREETING =
   "Espace Membres — Tonton JEF, votre expert en arbitrage Amazon.";
 
 /**
- * Thème UI. On retourne `any` pour rester compatible avec toutes les versions
- * de `@openai/chatkit` (évite les erreurs TS sur les propriétés de thème).
+ * Thème UI — on retourne `unknown` pour rester compatible avec les
+ * variations de schéma de `@openai/chatkit` sans déclencher ESLint.
  */
-export const getThemeConfig = (theme: ColorScheme): any => ({
+export const getThemeConfig = (theme: ColorScheme): unknown => ({
   colorScheme: theme, // "light" | "dark"
   color: {
     grayscale: {
@@ -52,4 +52,3 @@ export const getThemeConfig = (theme: ColorScheme): any => ({
   radius: "round",
   density: "comfortable",
 });
-
