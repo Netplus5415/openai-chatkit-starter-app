@@ -33,10 +33,11 @@ export const GREETING =
   "Espace Membres — Tonton JEF, votre expert en arbitrage Amazon.";
 
 /**
- * Thème UI — on retourne `unknown` pour rester compatible avec les
- * variations de schéma de `@openai/chatkit` sans déclencher ESLint.
+ * Thème UI — doit retourner un **objet** pour pouvoir être "spread"
+ * dans ChatKitPanel.tsx via `...getThemeConfig(theme)`.
+ * On typpe en Record<string, unknown> (objet sûr, sans `any`).
  */
-export const getThemeConfig = (theme: ColorScheme): unknown => ({
+export const getThemeConfig = (theme: ColorScheme): Record<string, unknown> => ({
   colorScheme: theme, // "light" | "dark"
   color: {
     grayscale: {
