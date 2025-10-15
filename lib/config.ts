@@ -1,39 +1,42 @@
 // lib/config.ts
-import type { ColorScheme, StartScreenPrompt, ThemeOption } from "@openai/chatkit";
+import type { ColorScheme, StartScreenPrompt } from "@openai/chatkit";
 
-/** ID du workflow ChatKit (public côté client) */
+/** ID du workflow ChatKit (exposé côté client) */
 export const WORKFLOW_ID =
   process.env.NEXT_PUBLIC_CHATKIT_WORKFLOW_ID?.trim() ?? "";
 
-/** Endpoint Next.js pour créer une session ChatKit côté serveur */
+/** Endpoint Next.js (côté serveur) qui crée la session ChatKit */
 export const CREATE_SESSION_ENDPOINT = "/api/create-session";
 
-/** Laisse un tableau (même vide) pour éviter les erreurs .map() */
+/** Prompts d'écran d'accueil (pas de `title` dans ce type) */
 export const STARTER_PROMPTS: StartScreenPrompt[] = [
   {
-    title: "Débloquer une marque",
     prompt:
       "Guide-moi étape par étape pour débloquer une marque sur Amazon avec une facture conforme.",
   },
   {
-    title: "Sourcing 500–3000 €",
     prompt:
       "Propose une stratégie de sourcing sécurisée (factures compatibles Amazon, retours maîtrisés).",
   },
   {
-    title: "Refus Amazon",
     prompt:
       "Diagnostique un refus de déblocage et liste les actions correctives rapides.",
   },
 ];
 
-export const PLACEHOLDER_INPUT = "Décris ton cas (ASIN, contexte, objectif)…";
+/** Texte placeholder de l’input */
+export const PLACEHOLDER_INPUT =
+  "Décris ton cas (ASIN, contexte, objectif)…";
 
+/** Message d’accueil */
 export const GREETING =
   "Espace Membres — Tonton JEF, votre expert en arbitrage Amazon.";
 
-/** Thème : fourni en fonction du mode (light/dark) demandé par ChatKit */
-export const getThemeConfig = (theme: ColorScheme): ThemeOption => ({
+/**
+ * Thème UI. On retourne `any` pour rester compatible avec toutes les versions
+ * de `@openai/chatkit` (évite les erreurs TS sur les propriétés de thème).
+ */
+export const getThemeConfig = (theme: ColorScheme): any => ({
   colorScheme: theme, // "light" | "dark"
   color: {
     grayscale: {
@@ -49,3 +52,4 @@ export const getThemeConfig = (theme: ColorScheme): ThemeOption => ({
   radius: "round",
   density: "comfortable",
 });
+
