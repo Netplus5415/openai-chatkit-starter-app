@@ -8,17 +8,20 @@ export const WORKFLOW_ID =
 /** Endpoint Next.js (côté serveur) qui crée la session ChatKit */
 export const CREATE_SESSION_ENDPOINT = "/api/create-session";
 
-/** Prompts d'écran d'accueil (type sans `title` dans ta version) */
+/** Prompts d'écran d'accueil (StartScreenPrompt requiert { label, prompt }) */
 export const STARTER_PROMPTS: StartScreenPrompt[] = [
   {
+    label: "Débloquer une marque",
     prompt:
       "Guide-moi étape par étape pour débloquer une marque sur Amazon avec une facture conforme.",
   },
   {
+    label: "Stratégie de sourcing",
     prompt:
       "Propose une stratégie de sourcing sécurisée (factures compatibles Amazon, retours maîtrisés).",
   },
   {
+    label: "Diagnostiquer un refus",
     prompt:
       "Diagnostique un refus de déblocage et liste les actions correctives rapides.",
   },
@@ -33,9 +36,7 @@ export const GREETING =
   "Espace Membres — Tonton JEF, votre expert en arbitrage Amazon.";
 
 /**
- * Thème UI — doit retourner un **objet** pour pouvoir être "spread"
- * dans ChatKitPanel.tsx via `...getThemeConfig(theme)`.
- * On typpe en Record<string, unknown> (objet sûr, sans `any`).
+ * Thème UI — doit retourner un objet pour être spread dans ChatKitPanel.tsx
  */
 export const getThemeConfig = (theme: ColorScheme): Record<string, unknown> => ({
   colorScheme: theme, // "light" | "dark"
