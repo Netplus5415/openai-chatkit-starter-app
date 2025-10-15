@@ -1,56 +1,35 @@
-// lib/config.ts
-import type { ColorScheme, StartScreenPrompt } from "@openai/chatkit";
+import { ColorScheme, StartScreenPrompt, ThemeOption } from "@openai/chatkit";
 
-/** ID du workflow ChatKit (exposé côté client) */
 export const WORKFLOW_ID =
   process.env.NEXT_PUBLIC_CHATKIT_WORKFLOW_ID?.trim() ?? "";
 
-/** Endpoint Next.js (côté serveur) qui crée la session ChatKit */
 export const CREATE_SESSION_ENDPOINT = "/api/create-session";
 
-/** Prompts d'écran d'accueil (StartScreenPrompt requiert { label, prompt }) */
 export const STARTER_PROMPTS: StartScreenPrompt[] = [
   {
-    label: "Débloquer une marque",
-    prompt:
-      "Guide-moi étape par étape pour débloquer une marque sur Amazon avec une facture conforme.",
-  },
-  {
-    label: "Stratégie de sourcing",
-    prompt:
-      "Propose une stratégie de sourcing sécurisée (factures compatibles Amazon, retours maîtrisés).",
-  },
-  {
-    label: "Diagnostiquer un refus",
-    prompt:
-      "Diagnostique un refus de déblocage et liste les actions correctives rapides.",
+    label: "What can you do?",
+    prompt: "What can you do?",
+    icon: "circle-question",
   },
 ];
 
-/** Texte placeholder de l’input */
-export const PLACEHOLDER_INPUT =
-  "Décris ton cas (ASIN, contexte, objectif)…";
+export const PLACEHOLDER_INPUT = "Ask anything...";
 
-/** Message d’accueil */
-export const GREETING =
-  "Espace Membres — Tonton JEF, votre expert en arbitrage Amazon.";
+export const GREETING = "How can I help you today?";
 
-/**
- * Thème UI — doit retourner un objet pour être spread dans ChatKitPanel.tsx
- */
-export const getThemeConfig = (theme: ColorScheme): Record<string, unknown> => ({
-  colorScheme: theme, // "light" | "dark"
+export const getThemeConfig = (theme: ColorScheme): ThemeOption => ({
   color: {
     grayscale: {
       hue: 220,
       tint: 6,
-      shade: theme === "dark" ? -1 : 4,
+      shade: theme === "dark" ? -1 : -4,
     },
     accent: {
-      primary: "#FF7D07",
-      level: 2,
+      primary: theme === "dark" ? "#f1f5f9" : "#0f172a",
+      level: 1,
     },
   },
   radius: "round",
-  density: "comfortable",
+  // Add other theme options here
+  // chatkit.studio/playground to explore config options
 });
