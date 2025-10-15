@@ -1,3 +1,4 @@
+// src/lib/config.ts
 import { ColorScheme, StartScreenPrompt, ThemeOption } from "@openai/chatkit";
 
 export const WORKFLOW_ID =
@@ -5,18 +6,16 @@ export const WORKFLOW_ID =
 
 export const CREATE_SESSION_ENDPOINT = "/api/create-session";
 
-export const STARTER_PROMPTS: StartScreenPrompt[] = [
-  {
-    label: "What can you do?",
-    prompt: "What can you do?",
-    icon: "circle-question",
-  },
-];
+// Espace membres : pas de prompts d'accueil
+export const STARTER_PROMPTS: StartScreenPrompt[] = [];
 
-export const PLACEHOLDER_INPUT = "Ask anything...";
+export const PLACEHOLDER_INPUT =
+  "Pose ta question à Tonton JEFF";
 
-export const GREETING = "How can I help you today?";
+export const GREETING =
+  "Espace Membres — Tonton JEFF, votre expert en arbitrage Amazon.";
 
+// Thème sobre + accent AMZSC
 export const getThemeConfig = (theme: ColorScheme): ThemeOption => ({
   color: {
     grayscale: {
@@ -25,11 +24,10 @@ export const getThemeConfig = (theme: ColorScheme): ThemeOption => ({
       shade: theme === "dark" ? -1 : -4,
     },
     accent: {
-      primary: theme === "dark" ? "#f1f5f9" : "#0f172a",
+      primary: "#FF7D07", // couleur de marque
       level: 1,
     },
   },
   radius: "round",
-  // Add other theme options here
-  // chatkit.studio/playground to explore config options
+  // (Tu peux explorer d'autres options sur chatkit.studio/playground si besoin)
 });
