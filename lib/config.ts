@@ -1,4 +1,4 @@
-// lib/config.ts
+// lib/config.ts 
 // Nettoyé : aucun marqueur de diff, aucun « @@ … »
 // Types en import "type" pour éviter tout import runtime inutile
 import type { ColorScheme, StartScreenPrompt, ThemeOption } from "@openai/chatkit";
