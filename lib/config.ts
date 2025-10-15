@@ -1,4 +1,3 @@
-// src/lib/config.ts (ou lib/config.ts selon l'import)
 import { ColorScheme, StartScreenPrompt, ThemeOption } from "@openai/chatkit";
 
 export const WORKFLOW_ID =
@@ -6,11 +5,14 @@ export const WORKFLOW_ID =
 
 export const CREATE_SESSION_ENDPOINT = "/api/create-session";
 
-// IMPORTANT : garder un tableau (même vide)
+// Laisse un tableau (même vide) pour éviter les erreurs .map()
 export const STARTER_PROMPTS: StartScreenPrompt[] = [];
 
-export const PLACEHOLDER_INPUT = "Décrivez votre cas (ASIN, contexte, objectif)…";
-export const GREETING = "Espace Membres — Tonton JEFF, votre expert en arbitrage Amazon.";
+export const PLACEHOLDER_INPUT =
+  "Décrivez votre cas (ASIN, contexte, objectif)…";
+
+export const GREETING =
+  "Espace Membres — Tonton JEFF, votre expert en arbitrage Amazon.";
 
 export const getThemeConfig = (theme: ColorScheme): ThemeOption => ({
   color: {
